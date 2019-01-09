@@ -45,6 +45,9 @@ public class FoldingCell extends RelativeLayout {
     private int mAdditionalFlipsCount = DEF_ADDITIONAL_FLIPS;
     private int mCameraHeight = DEF_CAMERA_HEIGHT;
 
+    // custom
+    private Animation.AnimationListener animListener;
+
     public FoldingCell(Context context) {
         this(context, null);
     }
@@ -76,6 +79,14 @@ public class FoldingCell extends RelativeLayout {
 
         this.setClipChildren(false);
         this.setClipToPadding(false);
+    }
+
+    public void setAnimationListener(Animation.AnimationListener listener){
+        this.animListener = listener;
+    }
+
+    public Animation.AnimationListener getAnimationListener(){
+        return animListener;
     }
 
     /**
@@ -154,6 +165,9 @@ public class FoldingCell extends RelativeLayout {
                     FoldingCell.this.removeView(foldingLayout);
                     FoldingCell.this.mUnfolded = true;
                     FoldingCell.this.mAnimationInProgress = false;
+                    if (getAnimationListener() != null){
+                        getAnimationListener().onAnimationEnd(animation);
+                    }
                 }
             });
 
@@ -214,6 +228,9 @@ public class FoldingCell extends RelativeLayout {
                     FoldingCell.this.removeView(foldingLayout);
                     FoldingCell.this.mAnimationInProgress = false;
                     FoldingCell.this.mUnfolded = false;
+                    if (getAnimationListener() != null){
+                        getAnimationListener().onAnimationEnd(animation);
+                    }
                 }
             });
             startCollapseHeightAnimation(heights, part90degreeAnimationDuration * 2);
