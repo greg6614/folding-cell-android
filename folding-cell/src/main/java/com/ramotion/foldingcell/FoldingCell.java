@@ -89,6 +89,10 @@ public class FoldingCell extends RelativeLayout {
         return animListener;
     }
 
+    public boolean isAnimationInProgress(){
+        return mAnimationInProgress;
+    }
+
     /**
      * Initializes folding cell programmatically with custom settings
      *
