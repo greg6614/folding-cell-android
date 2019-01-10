@@ -166,6 +166,7 @@ public class FoldingCell extends RelativeLayout {
                     FoldingCell.this.mUnfolded = true;
                     FoldingCell.this.mAnimationInProgress = false;
                     if (getAnimationListener() != null){
+                        getAnimationListener().onAnimationStart(animation);
                         getAnimationListener().onAnimationEnd(animation);
                     }
                 }
@@ -229,6 +230,7 @@ public class FoldingCell extends RelativeLayout {
                     FoldingCell.this.mAnimationInProgress = false;
                     FoldingCell.this.mUnfolded = false;
                     if (getAnimationListener() != null){
+                        getAnimationListener().onAnimationStart(animation);
                         getAnimationListener().onAnimationEnd(animation);
                     }
                 }
